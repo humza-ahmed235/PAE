@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/listOfSymposiums"
+    android:title="List of Symposiums"/>
+
+    <item android:id="@+id/fellows"
+        android:title="Fellows"/>
+
+    <item android:id="@+id/about"
+        android:title="About"/>
+</menu>

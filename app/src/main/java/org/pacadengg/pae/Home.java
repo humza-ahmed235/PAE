@@ -3,6 +3,7 @@ package org.pacadengg.pae;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 
 import org.jsoup.Jsoup;
@@ -12,6 +13,8 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.TextView;
 
 public class Home extends AppCompatActivity {
@@ -23,6 +26,10 @@ private TextView announcementNewsText;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Toolbar my_toolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(my_toolbar);
+
+
         new headlines().execute();
 
 
@@ -89,14 +96,13 @@ private TextView announcementNewsText;
         }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.my_menu,menu);
 
-
-
-
-
-
-
-
+        return true;
     }
+}
 
 
