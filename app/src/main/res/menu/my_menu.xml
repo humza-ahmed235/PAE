@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/listOfSymposiums"
+    <item android:id="@+id/home"
+        android:title="Home"/>
+    <item android:id="@+id/symposiums"
     android:title="List of Symposiums"/>
 
     <item android:id="@+id/fellows"
         android:title="Fellows"/>
 
-    <item android:id="@+id/about"
-        android:title="About"/>
+    <item android:id="@+id/contactUs"
+        android:title="Contact Us"/>
 </menu>
