@@ -54,7 +54,6 @@
         android:layout_marginBottom="8dp"
         android:autoSizeTextType="uniform"
         android:scrollbars="vertical"
-        android:text="Fetching Data"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -35,6 +35,7 @@ public static Document doc = null;
         new headlines().execute();
 
 
+
     }
 
     public  void getAnnouncementNews()  {
@@ -82,7 +83,7 @@ public static Document doc = null;
                 for (Element e : ec) {
 
                     String oneannounnews = e.select("p").text();// Stores each news piece and date piece
-                    paragraph = paragraph + oneannounnews + "\n";
+                    paragraph = paragraph + oneannounnews + "\n" + "\n" ;
 
                 }
                 System.out.println(paragraph);
