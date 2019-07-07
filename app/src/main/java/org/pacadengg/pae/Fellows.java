@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -43,6 +44,23 @@ public class Fellows extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            if(!UsefulMethods.hasActiveInternetConnection())
+            {  runOnUiThread(new Runnable() {
+                public void run() {
+                    Toast.makeText(getApplicationContext(),"No Internet Connection",Toast.LENGTH_LONG ).show();
+                }
+            });
+                // Checks if there is internet. Then runs toast. Toast can only be run from a ui/main thread. Not async
+
+            }
+
+            else{runOnUiThread(new Runnable() {
+                public void run() {
+                    Toast.makeText(getApplicationContext(),"Fetching Data",Toast.LENGTH_LONG ).show();
+                }
+            });}
+
+
             Document doc = null;
             try {
                 doc = Jsoup.connect("https://www.pacadengg.org/founder_fellows.html").get();

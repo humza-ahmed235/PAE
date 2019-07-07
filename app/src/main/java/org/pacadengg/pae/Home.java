@@ -1,6 +1,9 @@
 package org.pacadengg.pae;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Home extends AppCompatActivity {
 private static String paragraph = "";
@@ -35,28 +39,9 @@ public static Document doc = null;
         new headlines().execute();
 
 
-
     }
 
-    public  void getAnnouncementNews()  {
-        Document doc = null;
-        try {
 
-            doc = Jsoup.connect("http://www.pacadengg.org/index.html").userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36").get();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Elements ec = doc.select("div.col-2 p");
-            for (Element e : ec) {
-
-                String oneannounnews = e.select("p").text();// Stores each news piece and date piece
-                paragraph = paragraph + oneannounnews + "\n";
-            }
-
-        announcementNewsText = (TextView) findViewById(R.id.announcementNewsText);
-        announcementNewsText.setText(paragraph);
-
-        }
 
 
         private class headlines extends AsyncTask<Void,Void,Void>{
@@ -68,6 +53,24 @@ public static Document doc = null;
 
             @Override
             protected Void doInBackground(Void... voids) {
+                if(!UsefulMethods.hasActiveInternetConnection())
+                {  runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),"No Internet Connection",Toast.LENGTH_LONG ).show();
+                    }
+                });
+                    // Checks if there is internet. Then runs toast. Toast can only be run from a ui/main thread. Not async
+
+                    }
+
+                    else{runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),"Fetching Data",Toast.LENGTH_LONG ).show();
+                    }
+                });}
+
+
+
 
 
 
@@ -153,6 +156,10 @@ public static Document doc = null;
 
         else {return super.onOptionsItemSelected(item);}
     }
+
+
+
+
 }
 
 
