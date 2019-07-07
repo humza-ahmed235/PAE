@@ -76,18 +76,25 @@ public static Document doc = null;
                 try {
 
                     doc = Jsoup.connect("https://www.pacadengg.org/index.html").get();
-                } catch (IOException e) {
+
+                    Elements ec = doc.select("div.col-2 p");
+                    for (Element e : ec) {
+
+                        String oneannounnews = e.select("p").text();// Stores each news piece and date piece
+                        paragraph = paragraph + oneannounnews + "\n" + "\n";
+
+                    }
+                    System.out.println(paragraph);
+                }
+                catch(IOException e){
+                    e.printStackTrace();
+
+                }
+
+                catch (NullPointerException e){
+
                     e.printStackTrace();
                 }
-                Elements ec = doc.select("div.col-2 p");
-                for (Element e : ec) {
-
-                    String oneannounnews = e.select("p").text();// Stores each news piece and date piece
-                    paragraph = paragraph + oneannounnews + "\n" + "\n" ;
-
-                }
-                System.out.println(paragraph);
-
 
                 return null;
             }

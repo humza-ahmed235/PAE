@@ -42,16 +42,25 @@ new contactUsList().execute();
            Document doc = null;
 
             try {
-                 doc = Jsoup.connect("https://www.pacadengg.org/contactus.html").get();
-            } catch (IOException e) {
+                doc = Jsoup.connect("https://www.pacadengg.org/contactus.html").get();
+
+
+                Elements ec = doc.select("div.col-2.myfonts p"); // . added to make up for spaces
+                for (Element e : ec) {
+                    contactUsParagraph = contactUsParagraph + e.select("p").text() + "\n";
+                    contactUsParagraph = contactUsParagraph.replace("Feedback", "");
+
+                }
+
+            }
+            catch(IOException e){
                 e.printStackTrace();
+
             }
 
-            Elements ec = doc.select("div.col-2.myfonts p"); // . added to make up for spaces
-            for (Element e : ec) {
-                contactUsParagraph = contactUsParagraph + e.select("p").text() +"\n" ;
-                contactUsParagraph = contactUsParagraph.replace("Feedback","");
+            catch (NullPointerException e){
 
+                e.printStackTrace();
             }
 
             return null;

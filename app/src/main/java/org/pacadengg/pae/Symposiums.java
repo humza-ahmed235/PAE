@@ -81,13 +81,22 @@ public class Symposiums extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             Document doc = null;
             try {
-               doc = Jsoup.connect("https://www.pacadengg.org/events.html").get();
-            } catch (IOException e) {
-                e.printStackTrace();
+                doc = Jsoup.connect("https://www.pacadengg.org/events.html").get();
+
+                Elements ec = doc.select("div.wrap tr p");
+                for (Element e : ec) {
+                    symposiumsParagraph = symposiumsParagraph + e.select("p").text() + "\n" + "\n";
+                }
+
             }
-            Elements ec = doc.select("div.wrap tr p");
-            for (Element e : ec) {
-                symposiumsParagraph= symposiumsParagraph + e.select("p").text()+"\n"+"\n";
+            catch(IOException e){
+                e.printStackTrace();
+
+            }
+
+            catch (NullPointerException e){
+
+                e.printStackTrace();
             }
             return null;
         }

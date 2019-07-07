@@ -46,13 +46,22 @@ public class Fellows extends AppCompatActivity {
             Document doc = null;
             try {
                 doc = Jsoup.connect("https://www.pacadengg.org/founder_fellows.html").get();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Elements ec = doc.select("table.tablecss tr p");
-            for (Element e : ec) {
 
-                fellowsParagraph = fellowsParagraph + e.select("p").text() + "\n" + "\n";// Stores each news piece and date piece
+                Elements ec = doc.select("table.tablecss tr p");
+                for (Element e : ec) {
+
+                    fellowsParagraph = fellowsParagraph + e.select("p").text() + "\n" + "\n";// Stores each news piece and date piece
+                }
+
+            }
+            catch(IOException e){
+                e.printStackTrace();
+
+            }
+
+            catch (NullPointerException e){
+
+                e.printStackTrace();
             }
                 return null;
 
