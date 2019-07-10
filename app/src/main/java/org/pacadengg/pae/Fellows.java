@@ -2,6 +2,11 @@ package org.pacadengg.pae;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,16 +24,26 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
-public class Fellows extends AppCompatActivity {
+public class Fellows extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     TextView fellowsText;
     protected static String fellowsParagraph = "";
-
+    private DrawerLayout drawer;
+    private NavigationView naviView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fellows);
         Toolbar my_toolbar = findViewById(R.id.toolbarFellows);
         setSupportActionBar(my_toolbar);
+
+        drawer = findViewById(R.id.drawerFellows);
+        naviView = findViewById(R.id.naviViewFellows);
+        naviView.setNavigationItemSelectedListener(this);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,my_toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+
+        toggle.syncState();
+
         new fellowsList().execute();
 
 
@@ -138,6 +153,46 @@ public class Fellows extends AppCompatActivity {
 
 
         else {return super.onOptionsItemSelected(item);}
+    }
+@Override
+    public void onBackPressed() {
+        if(drawer.isDrawerOpen(GravityCompat.START))
+        { drawer.closeDrawer(GravityCompat.START);}
+        else {super.onBackPressed();}
+
+    }
+
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        int theID = menuItem.getItemId();
+
+        if(theID == R.id.home)
+        { Intent intent = new Intent(this,Home.class);
+            startActivity(intent);
+
+        }
+        if(theID == R.id.symposiums)
+        { Intent intent = new Intent(this,Symposiums.class);
+            startActivity(intent);
+
+        }
+
+        if(theID == R.id.fellows)
+        { Intent intent = new Intent(this,Fellows.class);
+            startActivity(intent);
+
+        }
+
+        if(theID == R.id.contactUs)
+        { Intent intent = new Intent(this,ContactUs.class);
+            startActivity(intent);
+
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
 }
