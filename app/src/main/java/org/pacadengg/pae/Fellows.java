@@ -59,6 +59,7 @@ public class Fellows extends AppCompatActivity implements NavigationView.OnNavig
 
         @Override
         protected Void doInBackground(Void... voids) {
+
             if(!UsefulMethods.hasActiveInternetConnection())
             {  runOnUiThread(new Runnable() {
                 public void run() {
@@ -75,6 +76,7 @@ public class Fellows extends AppCompatActivity implements NavigationView.OnNavig
                 }
             });}
 
+            // To understand (below) refer to JsoupPAE
 
             Document doc = null;
             try {

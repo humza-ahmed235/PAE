@@ -26,6 +26,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,24 +36,33 @@ private TextView announcementNewsText;
 public static Document doc = null;
 private DrawerLayout drawer;
 private NavigationView naviViewHome;
+    protected static ImageView slideshow;
+
+/*General note: all comments regarding html parsing are found in jsoupPAE */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar my_toolbar = findViewById(R.id.toolbarHome);
         setSupportActionBar(my_toolbar); // Sets title of app to toolbar
+        slideshow = (ImageView) findViewById(R.id.slideshow);
+
         drawer = findViewById(R.id.drawerHome);
         naviViewHome = findViewById(R.id.naviViewHome);
         naviViewHome.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,my_toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
-
         toggle.syncState();
 
 
-
+      /*  new UsefulMethods().new loadSlideshow().execute();  Since the async inner is in useful method and since async is non static
+I have first instantiate useful mehtod then async then called execute on async objec. According to java inner class rules
+*/
 
         new headlines().execute();
+
+        new UsefulMethods.getSlideLinks().execute();
+
 
 
     }
@@ -88,7 +98,7 @@ private NavigationView naviViewHome;
 
 
 
-
+                //To understand (below) refer to JsoupPAE
 
 
                 Document doc = null;

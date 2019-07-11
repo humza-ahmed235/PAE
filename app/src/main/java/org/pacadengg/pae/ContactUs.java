@@ -80,7 +80,7 @@ new contactUsList().execute();
                 doc = Jsoup.connect("https://www.pacadengg.org/contactus.html").get();
 
 
-                Elements ec = doc.select("div.col-2.myfonts p"); // . added to make up for spaces
+                Elements ec = doc.select("div.col-2.myfonts p");
                 for (Element e : ec) {
                     contactUsParagraph = contactUsParagraph + e.select("p").text() + "\n";
                     contactUsParagraph = contactUsParagraph.replace("Feedback", "");

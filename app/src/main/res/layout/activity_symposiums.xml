@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Symposiums"
-    android:background="#006699"
+    android:background="@color/colorPrimary"
     android:id="@+id/drawerSymposiums"
 
     >
